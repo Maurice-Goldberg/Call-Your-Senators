@@ -1,21 +1,28 @@
 body {
 	background-color: #47A1E5;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 img {
-	max-width: 100%;
-	max-height: 100%;
+	width: 150px;
+}
+
+#search-page {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: 15%;
 }
 
 h1 {
 	font-size: 28px;
 	color: #002A46;
 	font-family: "Arial", sans-serif;
-	position: absolute;
 	white-space: nowrap;
 	overflow: hidden;
-	top: -5px;
-	left: 23vw;
+	margin-bottom: 40px;
 }
 
 
@@ -34,16 +41,10 @@ h4 {
 }
 
 #search-form1 {
-	position: absolute;
-	left: 50%;	
-	margin-top: 230px;
-	margin-left: -28.5vw;
 	white-space: nowrap;
 }
 
 #search-form2 {
-	position: absolute;
-	margin-top: 40px;
 	white-space: nowrap;
 	overflow: hidden;
 }
@@ -85,9 +86,9 @@ h4 {
 }
 
 #location1:focus {
-	border-color: #004B70;
-	border-radius: 15px;	
-	border-width: medium;
+	outline: none;
+	background: rgb(177, 189, 197);
+	border: 2px solid rgb(54, 65, 71);
 }
 
 
@@ -134,12 +135,11 @@ h4 {
 }
 
 #results2_wrapper {
-	margin-top: 80px;
-	margin-left: 135px;
+	z-index: 2;
 }
 
 .col-sm-12 {
-	margin-top: -30px;
+	margin-top: -300px;
 }
 
 .col-sm-12 > table > thead {
@@ -149,8 +149,4 @@ h4 {
 .vr {
     width:10px;
     background-color: #002A46;
-    position:absolute;
-    top:0;
-    bottom:0;
-    left:150px;
 }
