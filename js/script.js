@@ -10,12 +10,8 @@ function returnTables(response) {
 	var responseObj = response;
 	var officialsArr = {};
 	var officesArr = {};
-	officialsArr = (responseObj.officials).slice(0);
-	officesArr = (responseObj.offices).slice(0);
-	
-	//logging the offices and officials arrays
-	console.log(officialsArr);
-	console.log(officesArr);
+	officialsArr = (responseObj.officials).slice(2);
+	officesArr = (responseObj.offices).slice(2);
 	
 	//declaring necessary variables
 	var i;
@@ -37,12 +33,10 @@ function returnTables(response) {
 			tr1 = $("<tr role=\"row\" class=\"odd\"></tr>").appendTo(w);
 			
 			//name of official
-			console.log(officialsArr[x].name);
 			tr1.append( "<td class=\"sorting_1\">" + officialsArr[x].name + "</td>" );
 			
 			//photoUrl of official
 			if(typeof(officialsArr[x].photoUrl) !== 'undefined') {
-				console.log(officialsArr[x].photoUrl);
 				tr1.append( "<td class=\"sorting_1\"><img src=\"" + officialsArr[x].photoUrl + "\"/></td>");
 			}
 			else {
@@ -52,7 +46,6 @@ function returnTables(response) {
 			//put position in table
 			if(typeof(officesArr[x]) !== 'undefined') {
 				positionStr = officesArr[x].name;
-				console.log("position: " + positionStr);
 				tr1.append('<td>' + positionStr + '</td>');
 			}
 			else {
@@ -61,7 +54,6 @@ function returnTables(response) {
 			
 			//party of official
 			if(typeof(officialsArr[x].party) !== 'undefined') {
-				console.log(officialsArr[x].party);
 				tr1.append( "<td class=\"sorting_1\">" + (officialsArr[x].party).charAt(0).toUpperCase() + (officialsArr[x].party).slice(1) + "</td>");
 			}
 			else {
@@ -69,52 +61,43 @@ function returnTables(response) {
 			}
 			
 			//address of official
-			addressStr = "";
-			officialsAddress = officialsArr[x].address;
-			line1 = officialsArr[x].address[0].line1;
-			line2 = officialsArr[x].address[0].line2;
-			city = officialsArr[x].address[0].city;
-			state = officialsArr[x].address[0].state;
-			zip = officialsArr[x].address[0].zip;
-			
-			console.log(officialsAddress);
-			if(typeof(officialsAddress) !== 'undefined') {		
-				if(officialsArr[x].address[0].hasOwnProperty('line1')) {
-					console.log("line1checkA");
-					addressStr += toTitleCase(line1) + ", ";
-					console.log("line1check");
-				}
-				if(officialsArr[x].address[0].hasOwnProperty('line2')) {
-					console.log("line2checkA");
-					addressStr += toTitleCase(line2) + ", ";
-					console.log("line2check");
-				}
-				if(officialsArr[x].address[0].hasOwnProperty('city')) {
-					console.log("citycheckA");
-					addressStr += toTitleCase(city) + ", ";
-					console.log("citycheck");
-				}
-				if(officialsArr[x].address[0].hasOwnProperty('state')) {
-					console.log("statecheckA");
-					addressStr += (state).toUpperCase() + ", ";
-					console.log("statecheck");
-				}
-				if(officialsArr[x].address[0].hasOwnProperty('zip')) {
-					console.log("zipcheckA");
-					addressStr += toTitleCase(zip);
-					console.log("zipcheck");
-				}
-				tr1.append("<td class=\"sorting_1\">" + addressStr + "</td>");
+			if(officialsArr[x].address) {
 				addressStr = "";
+				officialsAddress = officialsArr[x].address;
+				line1 = officialsArr[x].address[0].line1;
+				line2 = officialsArr[x].address[0].line2;
+				city = officialsArr[x].address[0].city;
+				state = officialsArr[x].address[0].state;
+				zip = officialsArr[x].address[0].zip;
+
+				if(typeof(officialsAddress) !== 'undefined') {		
+					if(officialsArr[x].address[0].hasOwnProperty('line1')) {
+						addressStr += toTitleCase(line1) + ", ";
+					}
+					if(officialsArr[x].address[0].hasOwnProperty('line2')) {
+						addressStr += toTitleCase(line2) + ", ";
+					}
+					if(officialsArr[x].address[0].hasOwnProperty('city')) {
+						addressStr += toTitleCase(city) + ", ";
+					}
+					if(officialsArr[x].address[0].hasOwnProperty('state')) {
+						addressStr += (state).toUpperCase() + ", ";
+					}
+					if(officialsArr[x].address[0].hasOwnProperty('zip')) {
+						addressStr += toTitleCase(zip);
+					}
+					tr1.append("<td class=\"sorting_1\">" + addressStr + "</td>");
+					addressStr = "";
+				}
 			}
+			
 			
 			else {
 				tr1.append('<td>' + "N/A" + '</td>');
 			}
 			
 			//phone of official
-			if(typeof(officialsArr[x].phones[0]) !== 'undefined') {
-				console.log(officialsArr[x].phones[0]);
+			if(typeof(officialsArr[x].phones) !== 'undefined') {
 				tr1.append( "<td class=\"sorting_1\">" + (officialsArr[x].phones[0]) + "</td>");
 			}
 			else {
@@ -133,20 +116,18 @@ function getData(locationInput) {
 			key: KEY
 		},
 		success: function(response) {
-			console.log(response);
 			returnTables(response);
 		},
 		error: function(response) {
-			console.log(response);
 			console.log("Something went wrong with your API call... Above is the response from the server.\n");
 		}
 	});
 }
 
 $(document).ready( function() {
-	$('#results2').DataTable({bFilter: false, bLengthChange: false, bPaginate: false, bInfo: false, ordering: false, pagingType: "full_numbers"});
-	$("#search-form1, #search-form2, h1, #results2, #results2_wrapper, #back-button").hide();
-	$("#search-form1, h1").fadeIn("slow");
+	$('#results2').DataTable({bFilter: false, bLengthChange: false, bPaginate: false, bInfo: false, ordering: false});
+	$("#search-form1, #search-form2, h1, h2, #results2, #results2_wrapper, #back-button").hide();
+	$("#search-form1, h1, h2").fadeIn("slow");
 	
 	//when user main submit button...
 	 document.getElementById('search-form1').addEventListener('submit', function (e) {
@@ -168,7 +149,8 @@ $(document).ready( function() {
 		getData(locationInput);
 		
 		//fade out main search form
-		$('#search-form1').fadeOut('slow');
+		$('#search-form1, h2').fadeOut('slow');
+		$('#search-form1, h2').hide();
 	
 		//fade in officials table and back-button
 		$('#results2_wrapper, #results2, #back-button').fadeIn('slow');

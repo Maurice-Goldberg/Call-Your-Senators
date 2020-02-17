@@ -5,37 +5,32 @@
 <head>
   <meta charset="UTF-8">
   <script src="js/jquery-1.12.3.js"></script>
-  <script src="js/bootstrap.js"></script>
   <script type="text/javascript" src="js/script.js"></script>
-  <script type="text/javascript" src="js/dropdown-enhancement.js"></script>
   <script src="js/jquery.dataTables.min.js"></script>
-  <script src="js/dataTables.bootstrap.min.js"></script>
-  <link rel="stylesheet" href="css/bootstrap.css" type="text/css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" type="test/css">
+  <link href="https://fonts.googleapis.com/css?family=Abril+Fatface&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/dropdowns-enhancement.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home</title>
 </head>
 
 <body>
-
-  <button type="button" class="btn btn-default" id="back-button">Back<br>
-  </button>
-  <h1>Find out about your local government representatives!</h1>
+  <h1>Call Your Senators!</h1>
+  <div id="button-wrapper">
+    <button type="button" id="back-button">New search</button>
+  </div>
+  <h2>Find out where to contact your state and local representatives</h2>
 
   <div id="search-page">
     <form id="search-form1">
-      <label for="location1" id="prompt1">Enter your location:</label><br>
-      <div>
-        <input type="text" id="location1">
-        <button type="submit" id="submit-button1">Submit</button>
-      </div>
+      <!-- <label for="location1" id="prompt1">Enter a city, state, or zip code:</label><br> -->
+        <input type="text" id="location1" placeholder="Enter a location">
+        <button type="submit" id="submit-button1">Go</button>
     </form>
   </div>
 
   <!---Officials table--->
-  <table id="results2" class="table table-striped table-bordered" cellspacing="0" width="90%" height="75%">
+  <table id="results2" class="table table-striped table-bordered" cellspacing="0">
     <thead>
       <tr>
         <th>Name</th>
